@@ -3,7 +3,8 @@ CC			= gcc
 CFLAGS	= -Wall -Wextra -Wpedantic -Wformat=2 -Wshadow -Wwrite-strings -Wstrict-prototypes -Wold-style-definition -Wredundant-decls -Wnested-externs -Wmissing-include-dirs -I./includes
 LDFLAGS	=	-g
 SOURCES =	./src/main.c	\
-					./src/manage_files.c
+					./src/manage_files.c	\
+					./src/parsing.c
 OBJECTS	=	$(SOURCES:.c=.o)
 
 all: $(TARGET)
