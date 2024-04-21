@@ -20,18 +20,52 @@ int	open_file(void) {
 	return (fd);
 }
 
-void	read_file(int fd) {
-	char	buf[256];
+void	read_file(int fd, char *buf) {
+	char tmp_buf[BUFFER_SIZE];
+	int char_read = 0;
+	int	i = 0, j;
+
+	while ((char_read = read(fd, tmp_buf, BUFFER_SIZE)) > 0) {
+		printf("char_read: %i\n", char_read);
+		while (i < char_read) {
+			j = 0;
+			while (tmp_buf[i] != '\n') {
+				buf[j] = tmp_buf[i];
+				i++;
+				j++;
+			}
+			i++;
+			j = 0;
+			while (buf[j]) {
+				write(1, &buf[j], 1);
+				j++;
+			}
+			printf("\n%i | ----------\n", j);
+			j = 0;
+			while (j < BUFFER_SIZE) {
+				buf[j] = '\0';
+				j++;
+			}
+		}
+	}
+/*
 	int		len = 0;
 	int readint = 0;
-
 	while ((readint = read(fd, buf, 255)) > 0) {
 		printf("%i\n", readint);
 		len = strlen(buf);
 		printf("LEN: %i\n", len);
-		printf("READ : %.*s\n", readint, buf);
+		int	i = 0;
+		char file_text[readint];
+		while (i < readint) {
+			file_text[i] = buf[i];
+			i++;
+		}
+		file_text[i] = '\0';
+		printf("READ : %s\n", file_text);
 	}
 	printf("fin\n");
+	*/
 }
 
 void	close_file(int fd) {
